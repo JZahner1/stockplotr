@@ -6,12 +6,14 @@
 <url><loc>nmfs-ost.github.io/stockplotr/LICENSE.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/README-internal.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/articles/convert_output_details.html</loc></url>
+<url><loc>nmfs-ost.github.io/stockplotr/articles/extract-sis-data.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/articles/faqs.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/articles/how-caps-alttext-are-made.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/articles/index.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/authors.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/index.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/calc_kqs.html</loc></url>
+<url><loc>nmfs-ost.github.io/stockplotr/reference/calculate_reference_point.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/check_label_differences.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/convert_output.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/create_latex_table.html</loc></url>
@@ -20,6 +22,7 @@
 <url><loc>nmfs-ost.github.io/stockplotr/reference/export_kqs.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/export_rda.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/extract_caps_alttext.html</loc></url>
+<url><loc>nmfs-ost.github.io/stockplotr/reference/extract_sis_data.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/fill_in_kqs.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/filter_data.html</loc></url>
 <url><loc>nmfs-ost.github.io/stockplotr/reference/index.html</loc></url>
