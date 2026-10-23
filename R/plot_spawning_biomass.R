@@ -278,7 +278,8 @@ plot_spawning_biomass <- function(
       ssb.ref.pt,
       ssb.units,
       ssb.start.year,
-      ssb.end.year
+      ssb.end.year,
+      dir=figures_dir
     )
 
     # Add key quantities to captions/alt text
@@ -286,7 +287,8 @@ plot_spawning_biomass <- function(
       ssb.ref.pt,
       ssb.units,
       ssb.start.year,
-      ssb.end.year
+      ssb.end.year,
+      dir=figures_dir
     )
 
     create_rda(

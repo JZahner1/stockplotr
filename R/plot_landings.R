@@ -124,7 +124,8 @@ plot_landings <- function(
       landings.end.year,
       landings.min,
       landings.max,
-      landings.units
+      landings.units,
+      dir=figures_dir
     )
 
     # Add key quantities to captions/alt text
@@ -133,7 +134,8 @@ plot_landings <- function(
       landings.end.year,
       landings.min,
       landings.max,
-      landings.units
+      landings.units,
+      dir=figures_dir
     )
 
     create_rda(

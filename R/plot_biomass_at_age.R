@@ -129,7 +129,8 @@ plot_biomass_at_age <- function(
       pop.baa.age.min,
       pop.baa.age.max,
       pop.baa.fish.min,
-      pop.baa.fish.max
+      pop.baa.fish.max,
+      dir=figures_dir
     )
 
     # Add key quantities to captions/alt text
@@ -139,7 +140,8 @@ plot_biomass_at_age <- function(
       pop.baa.age.min,
       pop.baa.age.max,
       pop.baa.fish.min,
-      pop.baa.fish.max
+      pop.baa.fish.max,
+      dir=figures_dir
     )
 
     create_rda(
@@ -147,6 +149,7 @@ plot_biomass_at_age <- function(
       # get name of function and remove "plot_" from it
       topic_label = gsub("plot_", "", utils::tail(as.character(sys.call()[[1]]), n = 1)),
       fig_or_table = "figure",
+      dir=figures_dir,
       dat
     )
   }

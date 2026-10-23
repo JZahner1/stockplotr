@@ -197,7 +197,8 @@ plot_stock_recruitment <- function(
       sr.ssb.max,
       recruitment.min,
       recruitment.max,
-      recruitment.units
+      recruitment.units,
+      dir=figures_dir
     )
 
     # Add key quantities to captions/alt text
@@ -208,7 +209,8 @@ plot_stock_recruitment <- function(
       sr.ssb.max,
       recruitment.min,
       recruitment.max,
-      recruitment.units
+      recruitment.units,
+      dir=figures_dir
     )
 
     create_rda(

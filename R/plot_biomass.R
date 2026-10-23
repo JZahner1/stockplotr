@@ -298,7 +298,8 @@ plot_biomass <- function(
       B.msy,
       B.terminal.est,
       B.terminal.min,
-      B.terminal.max
+      B.terminal.max,
+      dir=figures_dir
     )
 
     insert_kqs(
@@ -312,7 +313,8 @@ plot_biomass <- function(
       B.msy,
       B.terminal.est,
       B.terminal.min,
-      B.terminal.max
+      B.terminal.max,
+      dir=figures_dir
     )
 
     create_rda(

@@ -170,7 +170,8 @@ plot_fishing_mortality <- function(
       F.terminal.max,
       F.MSY.terminal.max,
       F.MSY.terminal.min,
-      F.MSY.terminal
+      F.MSY.terminal,
+      dir=figures_dir
     )
 
     insert_kqs(
@@ -185,7 +186,8 @@ plot_fishing_mortality <- function(
       F.terminal.max,
       F.MSY.terminal.max,
       F.MSY.terminal.min,
-      F.MSY.terminal
+      F.MSY.terminal,
+      dir=figures_dir
     )
 
     create_rda(
