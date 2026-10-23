@@ -388,11 +388,11 @@ fill_in_kqs <- function(df, ...) {
 #'   F.max
 #' )
 #' }
-export_kqs <- function(...) {
+export_kqs <- function(..., dir=getwd()) {
   # Open new or existing key quantities csv
-  if (file.exists(fs::path(getwd(), "key_quantities.csv"))) {
+  if (file.exists(fs::path(dir, "key_quantities.csv"))) {
     cli::cli_alert_info("Key quantities text file (key_quantities.csv) exists. Newly calculated key quantities will be added to it.", wrap = TRUE)
-    kqs <- utils::read.csv(file.path(getwd(), "key_quantities.csv"))
+    kqs <- utils::read.csv(file.path(dir, "key_quantities.csv"))
   } else {
     kqs <- utils::read.csv(
       system.file("resources", "key_quantity_template.csv", package = "stockplotr")
@@ -407,7 +407,7 @@ export_kqs <- function(...) {
 
   utils::write.csv(
     x = kqs_filled,
-    file = fs::path(getwd(), "key_quantities.csv"),
+    file = fs::path(dir, "key_quantities.csv"),
     row.names = FALSE
   )
 }
@@ -428,10 +428,10 @@ export_kqs <- function(...) {
 #'   F.max
 #' )
 #' }
-insert_kqs <- function(...) {
-  if (file.exists(fs::path(getwd(), "captions_alt_text.csv"))) {
+insert_kqs <- function(..., dir=getwd()) {
+  if (file.exists(fs::path(dir, "captions_alt_text.csv"))) {
     cli::cli_alert_info("Captions/alternative text file (captions_alt_text.csv) exists. Newly calculated key quantities will be added to it.", wrap = TRUE)
-    caps_alttext <- utils::read.csv(fs::path(getwd(), "captions_alt_text.csv"))
+    caps_alttext <- utils::read.csv(fs::path(dir, "captions_alt_text.csv"))
   } else {
     caps_alttext <- utils::read.csv(
       system.file("resources", "captions_alt_text_template.csv", package = "stockplotr")
@@ -485,7 +485,7 @@ insert_kqs <- function(...) {
   # export df with updated captions and alt text to csv
   utils::write.csv(
     x = caps_alttext,
-    file = fs::path(getwd(), "captions_alt_text.csv"),
+    file = fs::path(dir, "captions_alt_text.csv"),
     row.names = FALSE
   )
 
