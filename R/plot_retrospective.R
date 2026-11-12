@@ -1,3 +1,61 @@
+#' Plot retrospetive peels
+#' 
+#' Plot a given quantity across multiple models with differing 
+#' end years, so as to plot retrospective peels.
+#' 
+#' @inheritParams plot_spawning_biomass
+#' 
+#' @param end_years Integer. vector of what year, relative to the maximum
+#' year present in `dat`, should be treated as the final year for each
+#' model. Should be <= 0.
+#' 
+#' Default: 0
+#' 
+#' @param quantity String. Assessment quantity to plot (e.g., spawning biomass, 
+#' biomass, reruitment, etc.). Should correspond to an existing `plot_*` function.
+#' 
+#' Default: "spawning_biomass" 
+#' 
+#' @param show_end_year_points Logical. Whether to add points at the terminal year
+#' for each model peel.
+#' 
+#' Default: TRUE
+#' 
+#' @param group String. Single column that groups the data.
+#' 
+#' Default: "model"
+#' 
+#' @return A plot showing values of an assessment quantity across different 
+#' retrospective peels.
+#'
+#' @details The input is from an assessment model output file
+#' translated to a standardized output (\link[stockplotr]{convert_output}).
+#' There are options to return a `ggplot2` object or export an .rda object
+#' containing associated caption and alternative text for the figure.
+#'
+#' @note
+#' All plotting functions automatically recognize indexing variables and will
+#' use them in groupings and/or facetting. @seealso [process_data()].
+#'
+#' @seealso [convert_output()], [plot_timeseries()], [calculate_reference_point()], [reference_line()], [filter_data()], [process_data()], [export_kqs()], [insert_kqs()], [create_rda()]
+#'
+#' @export
+#'
+#' @examples
+#' plot_retrospective(
+#'   dat = retro_data,
+#'   end_years = 0:-5,
+#'   quantity = "spawning_biomass",
+#'   show_end_year_points=TRUE
+#' )
+#' plot_retrospective(
+#'   dat = retro_data,
+#'   end_years = 0:-5,
+#'   quantity = "spr",
+#'   show_end_year_points=TRUE,
+#'   interactive=FALSE,
+#'   module = "derived_quants"
+#' )
 plot_retrospective <- function(
   dat,
   end_years=NULL,
@@ -7,8 +65,7 @@ plot_retrospective <- function(
   ...
 ){
 
-  # plot_biomass, plot_spawning_biomass, plot_fishing_mortality
-  # plot_recruitment_deviations, plot_recruitment, plot_spr
+  # plot_biomass, plot_spawning_biomass, plot_fishing_mortality, plot_recruitment, plot_spr
   quantity <- match.arg(quantity, c("biomass", "spawning_biomass", "fishing_mortality", "recruitment", "spr"))
 
   func_name <- paste0("plot_",quantity)
@@ -24,7 +81,6 @@ plot_retrospective <- function(
   }
 
   retro_dat <- dat |>
-    # dplyr::mutate(model=as.character(model)) |>
     dplyr::filter(!is.na(year), !is.na(estimate)) |>
     dplyr::mutate(term_year=max(year)) |>
     dplyr::rowwise() |>
