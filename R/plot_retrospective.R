@@ -99,25 +99,22 @@ plot_retrospective <- function(
   )
 
   plt <- do.call(func_name, func_pars)
+  plot_data <- plt$layers[[2]]$data |> 
+    dplyr::rename(
+        dplyr::any_of(c(estimate="predicted_recruitment"))
+    )
 
   if(show_end_year_points){
     # get data from the "geom_line" elements and identfiy terminal year estimate
-    term_dat <- plt$layers[[2]]$data |> 
+    term_dat <- plot_data |> 
       dplyr::slice_max(order_by=year, n=1, by=model)
-
-    # This is kinda hacky, but would require changing "plot_recruitment"
-    # to conform to the "normal" plot data format
-    ycol <- switch(quantity,
-      "recruitment"="predicted_recruitment",
-      "estimate"
-    )
 
     plt <- plt+
       ggplot2::geom_point(
         data=term_dat, 
         ggplot2::aes(
             x=.data[["year"]], 
-            y=.data[[ycol]], 
+            y=.data[["estimate"]], 
             color={
               if (length(unique(.data[["model"]])) > 1) {
                 interaction(model, group_var)
