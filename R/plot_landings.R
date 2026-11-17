@@ -38,6 +38,7 @@ plot_landings <- function(
   era = NULL,
   scale_amount = 1,
   module = NULL,
+  model = NULL,
   interactive = TRUE,
   make_rda = FALSE,
   figures_dir = getwd(),
@@ -54,8 +55,10 @@ plot_landings <- function(
     group = group,
     facet = facet,
     module = module,
+    model = model,
     scale_amount = scale_amount,
-    interactive = interactive
+    interactive = interactive,
+    allow_multiple_models = TRUE
   ) # |>
   # filter NA from year
   # dplyr::filter(!is.na(year))
