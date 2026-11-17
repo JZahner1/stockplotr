@@ -59,6 +59,7 @@ table_landings <- function(
   group = NULL,
   method = "sum",
   module = NULL,
+  model = NULL,
   label = NULL,
   digits = 2,
   scale_amount = 1,
@@ -74,8 +75,10 @@ table_landings <- function(
     geom = "line",
     era = era,
     module = module,
+    model = NULL,
     scale_amount = scale_amount,
-    interactive = interactive
+    interactive = interactive,
+    allow_multiple_models = FALSE
   ) |>
     dplyr::mutate(estimate = round(as.numeric(estimate), digits = digits)) |>
     dplyr::mutate(uncertainty = round(as.numeric(uncertainty), digits = digits))
@@ -185,3 +188,6 @@ table_landings <- function(
 
   final
 }
+
+# table_landings(result)
+
