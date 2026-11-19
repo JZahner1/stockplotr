@@ -67,6 +67,9 @@
       <a href="../articles/convert_output_details.html">Standardizing Assessment Model Output</a>
     </li>
     <li>
+      <a href="../articles/composition_diagnostics.html">Composition data diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/extract-sis-data.html">Automating data extraction for SIS</a>
     </li>
   </ul></li>
@@ -102,7 +105,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">convert_output</span><span class="op">(</span><span class="va">files</span>, models <span class="op">=</span> <span class="cn">NULL</span>, fleet_names <span class="op">=</span> <span class="cn">NULL</span>, save_dir <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">convert_output</span><span class="op">(</span></span>
+<span>  <span class="va">files</span>,</span>
+<span>  models <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fleet_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start_year <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -112,8 +121,8 @@
 <dl><dt id="arg-files">files<a class="anchor" aria-label="anchor" href="#arg-files"></a></dt>
 <dd><p>List of Paths. Assessment model output file paths. Currently accepts SS3
 <code>r4ss::ss_output()</code> or Report.sso file (being deprecated), BAM .rda file, Rceattle model object,
-and FIMS output (the tibble returned by <code><a href="https://NOAA-FIMS.github.io/FIMS/reference/get_FIMSFit.html" class="external-link">FIMS::get_estimates()</a></code>, a <code>FIMSFit</code> object, or an
-.rds file with either). If multiple elements, all valid models will be read, converted, and
+and FIMS output (the tibble returned by <code><a href="https://NOAA-FIMS.github.io/FIMS/reference/get_FIMSFit.html" class="external-link">FIMS::get_estimates()</a></code>, a <code>FIMSFit</code> object, or an .rds
+file with either). If multiple elements, all valid models will be read, converted, and
 appended together.</p>
 <p><code>names(files)</code> will be used as the name of the model in the output.</p></dd>
 
@@ -122,16 +131,16 @@ appended together.</p>
 <dd><p>Character vector Assessment model used in evaluation</p>
 <p>Default: NULL</p>
 <p>Options: "ss3", "bam", "fims", "rceattle"</p>
-<p>Should match length of <code>files</code>.</p></dd>
+<p>Should match length of <code>files</code> if &gt;1 model.</p></dd>
 
 
 <dt id="arg-fleet-names">fleet_names<a class="anchor" aria-label="anchor" href="#arg-fleet-names"></a></dt>
-<dd><p>List of Character vectors. Names of fleets in the assessment model as
+<dd><p>List of named character vectors. Names of fleets in the assessment model as
 shortened in the output file or names of fleets to replace the native fleet
 names in the output. For example, if fleet names in the model are 1, 2, 3
 then fleet_names = c("fleet1" = 1, "fleet2" = 2, "fleet3" = 3).</p>
 <p>Default: NULL</p>
-<p>Should match length of <code>files</code>.</p></dd>
+<p>Should match length of <code>files</code> if &gt;1 model.</p></dd>
 
 
 <dt id="arg-save-dir">save_dir<a class="anchor" aria-label="anchor" href="#arg-save-dir"></a></dt>
@@ -176,15 +185,21 @@ Other estimates are relabeled with <code>fims_var_names.csv</code> (e.g.,
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">convert_output</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model1"</span>, <span class="st">"Report.sso"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  model <span class="op">=</span> <span class="st">"ss3"</span>,</span></span>
+<span class="r-in"><span>  files <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model1"</span>, <span class="st">"Report.sso"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  models <span class="op">=</span> <span class="st">"ss3"</span>,</span></span>
 <span class="r-in"><span>  fleet_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TWL"</span>, <span class="st">"NONTWL"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  save_dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"standard_output.rda"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">convert_output</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"model1"</span><span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model1"</span>, <span class="st">"Report.sso"</span><span class="op">)</span>, <span class="st">"model2"</span><span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model2"</span>, <span class="st">"Report.sso"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ss3"</span>, <span class="st">"ss3"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  fleet_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"model1"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TWL"</span>, <span class="st">"NONTWL"</span><span class="op">)</span>, <span class="st">"model2"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fishery1"</span>, <span class="st">"Survey1"</span>, <span class="st">"Survey2"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"model1"</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model1"</span>, <span class="st">"Report.sso"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"model2"</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"model2"</span>, <span class="st">"Report.sso"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ss3"</span>, <span class="st">"ss3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fleet_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"model1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TWL"</span>, <span class="st">"NONTWL"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"model2"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fishery1"</span>, <span class="st">"Survey1"</span>, <span class="st">"Survey2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  save_dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"standard_output.rda"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>

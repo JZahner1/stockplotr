@@ -67,6 +67,9 @@
       <a href="../articles/convert_output_details.html">Standardizing Assessment Model Output</a>
     </li>
     <li>
+      <a href="../articles/composition_diagnostics.html">Composition data diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/extract-sis-data.html">Automating data extraction for SIS</a>
     </li>
   </ul></li>
@@ -109,6 +112,7 @@
 <span>  facet <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interactive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  module <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  focus <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interval <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  log <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -131,8 +135,7 @@ in <code>ref_line</code> is used to plot a reference line or calculate relative 
 
 
 <dt id="arg-unit-label">unit_label<a class="anchor" aria-label="anchor" href="#arg-unit-label"></a></dt>
-<dd><p>String. Index of abundance/CPUE units</p>
-<p>Default: NULL</p></dd>
+<dd><p>String. Index of abundance/CPUE units, Default: NULL</p></dd>
 
 
 <dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
@@ -143,9 +146,9 @@ Options: Including, but not limited to: "year", "area", "fleet", "sex", "none", 
 
 
 <dt id="arg-facet">facet<a class="anchor" aria-label="anchor" href="#arg-facet"></a></dt>
-<dd><p>Character vector. Column name or names used for faceting. "fleet" is always added on to any faceting selections</p>
-<p>Default: NULL</p>
-<p>Options: May include, but is not limited to: "fleet", "year", "area", NULL</p></dd>
+<dd><p>Character vector. Column name or names used for faceting.
+"fleet" is always added on to any faceting selections. Default: NULL
+Options may include, but is not limited to: "fleet", "year", "area", NULL</p></dd>
 
 
 <dt id="arg-interactive">interactive<a class="anchor" aria-label="anchor" href="#arg-interactive"></a></dt>
@@ -161,6 +164,14 @@ If selecting &gt;1 module, place them in a vector like c("module1", "module2").<
 module_name in the console. @seealso <code><a href="filter_data.html">filter_data()</a></code></p></dd>
 
 
+<dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
+<dd><p>Character vector. (Optional) Model name found in <code>dat$model</code>.
+If selecting &gt;1 model, place them in a vector like c("model1", "model2").</p>
+<p>Default: NULL</p>
+<p>If the interactive and &gt;1 model is found, user will select the
+model in the console. @seealso <code><a href="filter_data.html">filter_data()</a></code></p></dd>
+
+
 <dt id="arg-focus">focus<a class="anchor" aria-label="anchor" href="#arg-focus"></a></dt>
 <dd><p>Character vector. Column name or names used to filter data.
 (i.e. select names of fleets to zoom into the plot). Default = NULL</p></dd>
@@ -169,15 +180,13 @@ module_name in the console. @seealso <code><a href="filter_data.html">filter_dat
 <dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
 <dd><p>Number. Coverage of intervals around the observed index
 based on its observation error (e.g., 0.95), drawn as vertical lines.
-NULL draws no intervals.</p>
-<p>Default: 0.95</p></dd>
+NULL draws no intervals. Default: 0.95</p></dd>
 
 
 <dt id="arg-log">log<a class="anchor" aria-label="anchor" href="#arg-log"></a></dt>
 <dd><p>Logical. TRUE/FALSE; plot the index on a log scale. Indices
 with lognormal errors are often easier to judge on a log scale, where the
-intervals are symmetric.</p>
-<p>Default: FALSE</p></dd>
+intervals are symmetric. Default: FALSE</p></dd>
 
 
 <dt id="arg-relative">relative<a class="anchor" aria-label="anchor" href="#arg-relative"></a></dt>
@@ -186,8 +195,7 @@ predicted index (and intervals) by the mean of its observed index, and plot
 all fleets on one panel, colored by fleet. Indices with conflicting trends
 (data conflicts) are a common cause of poor fits and are easiest to see
 this way (<code><a href="https://r4ss.github.io/r4ss/reference/SSplotIndices.html" class="external-link">r4ss::SSplotIndices()</a></code> subplot 9). Any <code>group</code> other than
-"fleet" is added to <code>facet</code>.</p>
-<p>Default: FALSE</p></dd>
+"fleet" is added to <code>facet</code>. Default: FALSE</p></dd>
 
 
 <dt id="arg-make-rda">make_rda<a class="anchor" aria-label="anchor" href="#arg-make-rda"></a></dt>
